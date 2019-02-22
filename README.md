@@ -1,2 +1,2 @@
-# SEO Non-Brand Report
-- input.json entsprechend durch Response der API ersetzen.
+# Hinweise
+- input.json entsprechend durch Response der Google Search Console API ersetzen.
