@@ -1,9 +1,10 @@
-# Hinweise
+# main.py
 - fuzzywuzzy Bibliothek muss vor der Ausführung installiert werden. *pip install fuzzywuzzy*
 - input.json entsprechend durch Response der Google Search Console API ersetzen.
-## API
-- Unter Google Cloud anmelden
-- Ein neues Dienstkonto (Service Account) erstellen (IAM & Verwaltung Menüpunkt)
-- Name wählen
-- JSON Key generieren
-- Die Email des JSON Keys in der GSC als lesenden Benutzer hinzufügen.
+## request_api.py
+- Bei https://console.cloud.google.com anmelden
+- Ein neues Dienstkonto (Service Account) erstellen (Unter Menüpunkt: IAM & Verwaltung)
+- Name des Dienstkonto erstellen
+- Schlüssel erstellen und JSON wählen
+- Der Schlüssel ist eine JSON Datei, die in das Stammverzeichnis des Programms muss.
+- Die ID des Dienstkonto (E-Mail Adresse) muss als lesender Benutzer zu der entsprechenden GSC Property hinzugefügt werden.
