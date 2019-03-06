@@ -13,9 +13,9 @@ webmasters_service = googleapiclient.discovery.build('webmasters', 'v3', credent
 
 request = {
     'startDate': '2019-01-10',
-    'endDate': '2019-01-11',
+    'endDate': '2019-01-10',
     'dimensions': ['query'],
-    'rowLimit': 10
+    'rowLimit': 25000
     }
 
 response = webmasters_service.searchanalytics().query(siteUrl='https://www.xyz.de/', body=request).execute()
