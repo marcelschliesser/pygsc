@@ -1,4 +1,4 @@
-<center>
+<div align="center">
     <img src="images/pygsc.png">
     <h2>Python & GSC</h2>
     <p>
@@ -13,7 +13,7 @@
         •
         <a href="#">Contact me</a>
     </p>
-</center>
+</div>
 
 ## About the Project
 I am slowy leaving the **SEO Community** and diving deeper into **data engineering.**
