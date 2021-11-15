@@ -17,5 +17,6 @@
 
 ## About the Project
 I am slowy leaving the **SEO community** and diving deeper into **data engineering.**
-Therefore i started do develop a **data Pipeline** which backup your **SEO data** from
-the **[google search console api](https://developers.google.com/webmaster-tools/search-console-api-original)** and load it into a **[big query](https://cloud.google.com/bigquery)** datawarehouse.
+Therefore i started do develop a **data pipeline** which backup your **SEO data** from
+the **[google search console api](https://developers.google.com/webmaster-tools/search-console-api-original)** and load it into a **[big query](https://cloud.google.com/bigquery)** datawarehouse
+for further analysis.
