@@ -1,11 +1,21 @@
-New Updates in 2021
-## main.py
-- fuzzywuzzy Bibliothek muss vor der Ausführung installiert werden. *pip install fuzzywuzzy*
-- input.json entsprechend durch Response der Google Search Console API ersetzen.
-## request_api.py
-- Bei https://console.cloud.google.com anmelden
-- Ein neues Dienstkonto (Service Account) erstellen (Unter Menüpunkt: IAM & Verwaltung)
-- Name des Dienstkonto erstellen
-- Schlüssel erstellen und JSON wählen
-- Der Schlüssel ist eine JSON Datei, die in das Stammverzeichnis des Programms muss.
-- Die ID des Dienstkonto (E-Mail Adresse) muss als lesender Benutzer zu der entsprechenden GSC Property hinzugefügt werden.
+<div align="center">
+    <a href="https://github.com/marcelschliesser/pygsc">
+        <img src="images/pygsc.png" alt="pygsc" width="20%" height="20%">
+    </a>
+    <h2>Python & GSC</h2>
+    <p>
+        Load your SEO Data from Google Search Console into your Big Query Datawarehouse.
+        <br />
+        <a href="#"><strong>Explore the docs »</strong></a>
+        <br />
+        <br />
+        <a href="#">View Demo</a>
+        ·
+        <a href="#">Report Bug</a>
+        ·
+        <a href="#">Request Feature</a>
+    </p>
+</div>
+
+## About the Project
+tbd
