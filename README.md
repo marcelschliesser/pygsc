@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="images/pygsc.png">
+    <img src="readme_ressources/pygsc.png">
     <h2>Python & GSC</h2>
     <p>
         Load your SEO Data from Google Search Console into your Big Query Datawarehouse.
@@ -16,6 +16,6 @@
 </div>
 
 ## About the Project
-I am slowy leaving the **SEO Community** and diving deeper into **data engineering.**
+I am slowy leaving the **SEO community** and diving deeper into **data engineering.**
 Therefore i started do develop a **data Pipeline** which backup your SEO **data** from
 the **google search console api** and load it into a **big query** datawarehouse.
