@@ -1,56 +1,33 @@
-import json
-from fuzzywuzzy import fuzz
+import google.auth
+from google.auth import impersonated_credentials
+import googleapiclient.discovery
 
-def load_json_data(filename):
-    """Die Funktion lädt die Datei input.json in den Arbeitsspeicher."""
-    json_data = open(filename)
-    data = json.load(json_data)
-    json_data.close()
-    return data
+target_scopes = ["https://www.googleapis.com/auth/webmasters.readonly"]
+source_credentials, project_id = google.auth.default()
+target_credentials = impersonated_credentials.Credentials(
+    source_credentials=source_credentials,
+    target_principal='bigquery-exporter@onyx-dragon-349408.iam.gserviceaccount.com',
+    target_scopes=target_scopes,
+    lifetime=500)
 
-def calc_threshold(data):
-    """Diese Funktion berechnet den Brand-Schwellwert."""
-    words = []
-    data = load_json_data('input.json')
-    for i in data['rows']:
-        words_i = i['keys'][0].split(' ')
-        for x in words_i:
-            words.append(x)
-    words = sorted(set(words))
-    for y in words:
-        result = fuzz.ratio(y, 'tchibo')
-        print('{},{},{}'.format(y, result, result - 67))
+search_console_service = googleapiclient.discovery.build(
+    'searchconsole',
+    'v1',
+    credentials=target_credentials,
+    cache_discovery=False)
 
-def determine_brand(data):
-    """Diese Funktion interiert über den Datensatz und bestimmt pro Zeile den Brandcharakter."""
-    out = []
-    data = load_json_data('input.json')
-    for i in data['rows']:
-        res = []
-        for x in i['keys'][0].split(' '):
-            res.append(fuzz.ratio(x, 'tchibo') -67)
-        i['brand'] = max(res) >= 0
-        print(i)
-        out.append(i)
-    return out
 
-def calc_non_brand_ratio(data):
-    """Diese Funktion berechnet das NonBrand-Verhältnis des Datensatz."""
-    nonbrand_clicks = 0
-    brand_clicks = 0
-    for i in data:
-        if i['brand']:
-            brand_clicks += i['clicks']
-        else:
-            nonbrand_clicks += i['clicks']
-    return (brand_clicks, nonbrand_clicks, (nonbrand_clicks/(nonbrand_clicks + brand_clicks)))
+site_list = search_console_service.sites().list().execute()
+print(site_list)
 
-def main():
-    data = load_json_data('input.json')
-    calc_threshold(data)
-    data = determine_brand(data)
-    ratio = calc_non_brand_ratio(data)
-    print(ratio)
 
-if __name__ == '__main__':
-    main()
+request = {
+    'startDate': '2022-01-01',
+    'endDate': '2022-01-03',
+    'dimensions': ['query'],
+    'rowLimit': 25000
+    }
+
+#response = search_console_service.searchanalytics().query(siteUrl='sc-domain:', body=request).execute()
+
+#print(response)
