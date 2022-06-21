@@ -3,3 +3,6 @@ tf-apply:
 	terraform -chdir=infrastructure validate
 	terraform -chdir=infrastructure plan
 	terraform -chdir=infrastructure apply
+
+run:
+	python application/main.py
