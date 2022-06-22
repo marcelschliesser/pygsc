@@ -4,3 +4,5 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+
+.vscode/
