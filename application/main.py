@@ -1,6 +1,12 @@
 import google.auth
+import argparse
 from google.auth import impersonated_credentials
 import googleapiclient.discovery
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("domain")
+args = parser.parse_args()
 
 target_scopes = ["https://www.googleapis.com/auth/webmasters.readonly"]
 source_credentials, project_id = google.auth.default()
@@ -16,18 +22,13 @@ search_console_service = googleapiclient.discovery.build(
     credentials=target_credentials,
     cache_discovery=False)
 
-
-site_list = search_console_service.sites().list().execute()
-print(site_list)
-
-
 request = {
     'startDate': '2022-01-01',
     'endDate': '2022-01-03',
-    'dimensions': ['query'],
-    'rowLimit': 25000
+    'dimensions': ['country', 'device', 'page', 'query'],
+    'rowLimit': 1
     }
 
-#response = search_console_service.searchanalytics().query(siteUrl='sc-domain:', body=request).execute()
+response = search_console_service.searchanalytics().query(siteUrl=f'sc-domain:{args.domain}', body=request).execute()
 
-#print(response)
+print(response)
