@@ -22,13 +22,25 @@ search_console_service = googleapiclient.discovery.build(
     credentials=target_credentials,
     cache_discovery=False)
 
+dimensions = ['date', 'country', 'device', 'page', 'query']
+
 request = {
     'startDate': '2022-01-01',
     'endDate': '2022-01-03',
-    'dimensions': ['country', 'device', 'page', 'query'],
+    'dimensions': dimensions,
     'rowLimit': 1
     }
 
-response = search_console_service.searchanalytics().query(siteUrl=f'sc-domain:{args.domain}', body=request).execute()
 
+def prepare_data_bigquery(data):
+    
+    data['rows'][0]['keys'] = dict(zip(dimensions, data['rows'][0]['keys']))
+
+    print(dict(data))
+
+response = search_console_service.searchanalytics().query(siteUrl=f'sc-domain:{args.domain}', body=request).execute()
 print(response)
+prepare_data_bigquery(response)
+
+
+
