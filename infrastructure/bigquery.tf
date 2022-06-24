@@ -5,3 +5,18 @@ resource "google_bigquery_dataset" "dataset" {
   location      = var.region
   labels        = merge(local.default_labels, {})
 }
+
+resource "google_bigquery_table" "default" {
+  dataset_id = google_bigquery_dataset.dataset.dataset_id
+  table_id   = "google_search_console_data"
+
+  time_partitioning {
+    type  = "DAY"
+    field = "date"
+  }
+
+  labels = merge(local.default_labels, {})
+
+  schema = file("bigquery_schema/google_search_console_data_table.json")
+
+}
