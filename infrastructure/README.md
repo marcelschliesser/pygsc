@@ -1,1 +1,1 @@
-Infrarstructure is managed by terraform.
+Infrarstructure is managed by terraform
