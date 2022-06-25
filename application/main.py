@@ -33,13 +33,13 @@ request = {
 
 
 def prepare_data_bigquery(data):
-    
-    data['rows'][0]['keys'] = dict(zip(dimensions, data['rows'][0]['keys']))
-
-    print(dict(data))
+    mapped = dict(zip(dimensions, data['rows'][0]['keys']))
+    del data['rows'][0]['keys']
+    z = mapped | data['rows'][0]
+    print(z)
 
 response = search_console_service.searchanalytics().query(siteUrl=f'sc-domain:{args.domain}', body=request).execute()
-print(response)
+
 prepare_data_bigquery(response)
 
 
