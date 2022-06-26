@@ -1,46 +1,37 @@
 [
     {
-        "mode": "REQUIRED",
         "name": "date",
         "type": "DATE"
     },
     {
-        "mode": "REQUIRED",
         "name": "page",
         "type": "STRING"
     },
     {
-        "mode": "REQUIRED",
         "name": "country",
         "type": "STRING"
     },
     {
-        "mode": "REQUIRED",
         "name": "device",
         "type": "STRING"
     },
     {
-        "mode": "REQUIRED",
         "name": "query",
         "type": "STRING"
     },
     {
-        "mode": "REQUIRED",
         "name": "clicks",
         "type": "INTEGER"
     },
     {
-        "mode": "REQUIRED",
         "name": "impressions",
         "type": "INTEGER"
     },
     {
-        "mode": "REQUIRED",
         "name": "ctr",
         "type": "FLOAT"
     },
     {
-        "mode": "REQUIRED",
         "name": "position",
         "type": "INTEGER"
     }

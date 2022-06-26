@@ -50,5 +50,5 @@ data_in = prepare_data_bigquery(response)
 print(data_in)
 
 client = bigquery.Client()
-client.load_table_from_json([data_in], 'onyx-dragon-349408.google_search_console.google_search_console_data')
+client.load_table_from_json(data_in, 'onyx-dragon-349408.google_search_console.google_search_console_data')
 
