@@ -16,7 +16,7 @@ target_credentials = impersonated_credentials.Credentials(
     source_credentials=source_credentials,
     target_principal='bigquery-exporter@onyx-dragon-349408.iam.gserviceaccount.com',
     target_scopes=target_scopes,
-    lifetime=500)
+    lifetime=60)
 
 search_console_service = googleapiclient.discovery.build(
     'searchconsole',
