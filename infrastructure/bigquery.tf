@@ -7,8 +7,9 @@ resource "google_bigquery_dataset" "dataset" {
 }
 
 resource "google_bigquery_table" "default" {
-  dataset_id = google_bigquery_dataset.dataset.dataset_id
-  table_id   = "google_search_console_data"
+  deletion_protection = false
+  dataset_id          = google_bigquery_dataset.dataset.dataset_id
+  table_id            = "google_search_console_data"
 
   time_partitioning {
     type  = "DAY"

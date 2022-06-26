@@ -27,12 +27,12 @@
     {
         "mode": "REQUIRED",
         "name": "clicks",
-        "type": "FLOAT"
+        "type": "INTEGER"
     },
     {
         "mode": "REQUIRED",
         "name": "impressions",
-        "type": "FLOAT"
+        "type": "INTEGER"
     },
     {
         "mode": "REQUIRED",
@@ -42,6 +42,6 @@
     {
         "mode": "REQUIRED",
         "name": "position",
-        "type": "FLOAT"
+        "type": "INTEGER"
     }
 ]
