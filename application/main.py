@@ -26,12 +26,19 @@ search_console_service = googleapiclient.discovery.build(
 
 dimensions = ['date', 'country', 'device', 'page', 'query']
 
-request = {
+payload = {
     'startDate': '2022-01-01',
     'endDate': '2022-01-03',
+    'searchType': 'web',
     'dimensions': dimensions,
-    'rowLimit': 10
+    'rowLimit': 25000,
+    "startRow": start_row
     }
+
+def fetch_gsc_data():
+    data = list()
+    start_row = 0
+
 
 
 def prepare_data_bigquery(data):
@@ -45,10 +52,10 @@ def prepare_data_bigquery(data):
 
 
 response = search_console_service.searchanalytics().query(siteUrl=f'sc-domain:{args.domain}', body=request).execute()
+print(len(response['rows']))
+#data_in = prepare_data_bigquery(response)
+#print(data_in)
 
-data_in = prepare_data_bigquery(response)
-print(data_in)
-
-client = bigquery.Client()
-client.load_table_from_json(data_in, 'onyx-dragon-349408.google_search_console.google_search_console_data')
+#client = bigquery.Client()
+#client.load_table_from_json(data_in, 'onyx-dragon-349408.google_search_console.google_search_console_data')
 
