@@ -1,1 +1,1 @@
-Load Data from Google Search Console into Big Query
+Load Data from Google Search Console into Big Query.
