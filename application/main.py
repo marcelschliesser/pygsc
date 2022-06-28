@@ -26,36 +26,52 @@ search_console_service = googleapiclient.discovery.build(
 
 dimensions = ['date', 'country', 'device', 'page', 'query']
 
-payload = {
-    'startDate': '2022-01-01',
-    'endDate': '2022-01-03',
-    'searchType': 'web',
-    'dimensions': dimensions,
-    'rowLimit': 25000,
-    "startRow": start_row
-    }
 
-def fetch_gsc_data():
-    data = list()
-    start_row = 0
+def call_google_search_console_api(date: str):
+    return_data = list()
+    index = 0
+    row_limit = 25000
 
+    while True:
+        payload = {
+            'startDate': date,
+            'endDate': date,
+            'searchType': 'web',
+            'dimensions': dimensions,
+            'rowLimit': row_limit,
+            "startRow": row_limit * index
+        }
+
+        chunk = search_console_service.searchanalytics().query(
+            siteUrl=f'sc-domain:{args.domain}',
+            body=payload).execute()
+
+        index += 1
+
+        if 'rows' in chunk.keys():
+            return_data.extend(chunk['rows'])
+        else:
+            break
+
+    return return_data
 
 
 def prepare_data_bigquery(data):
+    """
+    Map the Values to the Dimensions. And add alle KPIs like clicks etc.
+    """
     out = list()
-    for row in data['rows']:
+    for row in data:
         mapped = dict(zip(dimensions, row['keys']))
         del row['keys']
-        out.append(mapped | data['rows'][0])
+        out.append(mapped | row)
     return out
 
 
+gsc_data = call_google_search_console_api(date='2022-01-01')
 
-response = search_console_service.searchanalytics().query(siteUrl=f'sc-domain:{args.domain}', body=request).execute()
-print(len(response['rows']))
-#data_in = prepare_data_bigquery(response)
-#print(data_in)
+gsc_data_transformed = prepare_data_bigquery(gsc_data)
 
-#client = bigquery.Client()
-#client.load_table_from_json(data_in, 'onyx-dragon-349408.google_search_console.google_search_console_data')
-
+bigquery_client = bigquery.Client()
+bigquery_client.load_table_from_json(
+    gsc_data_transformed, 'onyx-dragon-349408.google_search_console.google_search_console_data')
