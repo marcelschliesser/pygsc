@@ -68,10 +68,15 @@ def prepare_data_bigquery(data):
     return out
 
 
-gsc_data = call_google_search_console_api(date='2022-01-01')
+date = "2022-01-01"
+gsc_data = call_google_search_console_api(date=date)
 
 gsc_data_transformed = prepare_data_bigquery(gsc_data)
 
+table = "onyx-dragon-349408.google_search_console.google_search_console_data"
 bigquery_client = bigquery.Client()
+query_job = bigquery_client.query(f"DELETE FROM `{table}` WHERE date = '{date}'")
+results = query_job.result()
+
 bigquery_client.load_table_from_json(
-    gsc_data_transformed, 'onyx-dragon-349408.google_search_console.google_search_console_data')
+    gsc_data_transformed, table)
