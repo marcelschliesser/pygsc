@@ -33,6 +33,6 @@
     },
     {
         "name": "position",
-        "type": "INTEGER"
+        "type": "FLOAT"
     }
 ]
