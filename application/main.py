@@ -73,10 +73,15 @@ gsc_data = call_google_search_console_api(date=date)
 
 gsc_data_transformed = prepare_data_bigquery(gsc_data)
 
-table = "onyx-dragon-349408.google_search_console.google_search_console_data"
+job_config = bigquery.LoadJobConfig()
+job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
+job_config.time_partitioning = bigquery.TimePartitioning(field="date")
+
 bigquery_client = bigquery.Client()
-query_job = bigquery_client.query(f"DELETE FROM `{table}` WHERE date = '{date}'")
-results = query_job.result()
+table_ref = bigquery_client.dataset('google_search_console').table(f'google_search_console_data${date.replace("-", "")}')
 
 bigquery_client.load_table_from_json(
-    gsc_data_transformed, table)
+    json_rows=gsc_data_transformed,
+    destination=table_ref,
+    job_config=job_config
+    )
