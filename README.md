@@ -3,5 +3,5 @@ Export Google Search Data via the **Google Search Console API** to **BigQuery**.
 ## Flowchart
 ```mermaid
 graph LR;
-    ((timer)) --> extract --> load;
+    a((timer)) --> b[extract] --> c[load];
 ```
